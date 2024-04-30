@@ -25,7 +25,7 @@ export async function GET(request:Request) {
     try {
         const { searchParams } = new URL(request.url)
         const queryParam ={
-            username : searchParams.get("username")
+            username : searchParams.get('username')
         }
         // validate with zod
         const result = UsernameQuerySchema.safeParse(queryParam);
@@ -54,7 +54,7 @@ export async function GET(request:Request) {
                     message:"Username is already taken"
                 },
                 {
-                    status:400
+                    status:200
                 }
             )
         }
@@ -62,10 +62,10 @@ export async function GET(request:Request) {
         return Response.json(
             {
                 success:true,
-                message:"Username is avaliable"
+                message:"Username is unique"
             },
             {
-                status:500
+                status:200
             }
         )
     } catch (error) {
